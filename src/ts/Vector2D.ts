@@ -10,4 +10,8 @@ export default class Vector2D {
     this.x += other.x;
     this.y += other.y;
   }
+
+  clone(): Vector2D {
+    return new Vector2D(this.x, this.y);
+  }
 }

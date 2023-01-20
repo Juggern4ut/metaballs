@@ -8,12 +8,12 @@ const resolution = 4;
 
 const cells: Cell[] = [];
 
-for (let i = 0; i < 15; i++) {
+for (let i = 0; i < 1; i++) {
   const randomX = Math.random() * 640;
   const randomY = Math.random() * 640;
   const randomXDir = Math.random() * 10 - 5;
   const randomYDir = Math.random() * 10 - 5;
-  const randomYRadius = Math.random() * 20 + 5;
+  const randomYRadius = Math.random() * 50 + 5;
   cells.push(
     new Cell(
       new Vector2D(randomX, randomY),
@@ -22,6 +22,19 @@ for (let i = 0; i < 15; i++) {
     )
   );
 }
+
+canvas.addEventListener("click", (e) => {
+  for (let i = 0; i < cells.length; i++) {
+    const c = cells[i];
+    if (c.dist(e.pageX, e.pageY) <= c.radius) {
+      const newCells = c.split();
+      cells.push(newCells[0]);
+      cells.push(newCells[1]);
+      cells.splice(i, 1);
+      break;
+    }
+  }
+});
 
 setInterval(() => {
   ctx.clearRect(0, 0, 640, 640);

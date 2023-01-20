@@ -11,6 +11,9 @@ class Vector2D {
         this.x += other.x;
         this.y += other.y;
     }
+    clone() {
+        return new Vector2D(this.x, this.y);
+    }
 }
 exports.default = Vector2D;
 //# sourceMappingURL=Vector2D.js.map
