@@ -4,7 +4,11 @@ import Vector2D from "./Vector2D";
 const canvas = document.querySelector("#canvas") as HTMLCanvasElement;
 const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
 
-const resolution = 4;
+const domRes = document.querySelector("#resolution") as HTMLSelectElement;
+const showCells = document.querySelector("#showCells") as HTMLInputElement;
+
+let resolution = 4;
+let showBorders = false;
 
 const cells: Cell[] = [];
 
@@ -22,6 +26,16 @@ for (let i = 0; i < 1; i++) {
     )
   );
 }
+
+showCells.addEventListener("change", (e) => {
+  showBorders = e.target.checked;
+});
+
+domRes.addEventListener("change", (e: Event) => {
+  if (e && e.target) {
+    resolution = parseInt(e.target.value);
+  }
+});
 
 canvas.addEventListener("click", (e) => {
   for (let i = 0; i < cells.length; i++) {
@@ -41,7 +55,9 @@ setInterval(() => {
   pixels();
   cells.forEach((c) => {
     c.update();
-    //c.show(ctx);
+    if (showBorders) {
+      c.show(ctx);
+    }
   });
 }, 50);
 
@@ -53,8 +69,12 @@ const pixels = () => {
         const dist = c.dist(x, y);
         sum += (500 * c.radius) / dist;
       });
+
+      sum = sum > 360 ? 360 : sum;
+      sum = sum < 120 ? 120 : sum;
+
       //ctx.fillStyle = `rgb(${sum}, ${sum}, ${sum})`;
-      ctx.fillStyle = `hsl(${sum}, 100%, 75%)`;
+      ctx.fillStyle = `hsl(${sum}, 100%, 50%)`;
       ctx.fillRect(x, y, resolution, resolution);
     }
   }

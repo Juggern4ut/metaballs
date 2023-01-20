@@ -7,7 +7,10 @@ const Cell_1 = __importDefault(require("./Cell"));
 const Vector2D_1 = __importDefault(require("./Vector2D"));
 const canvas = document.querySelector("#canvas");
 const ctx = canvas.getContext("2d");
-const resolution = 4;
+const domRes = document.querySelector("#resolution");
+const showCells = document.querySelector("#showCells");
+let resolution = 4;
+let showBorders = false;
 const cells = [];
 for (let i = 0; i < 1; i++) {
     const randomX = Math.random() * 640;
@@ -17,6 +20,14 @@ for (let i = 0; i < 1; i++) {
     const randomYRadius = Math.random() * 50 + 5;
     cells.push(new Cell_1.default(new Vector2D_1.default(randomX, randomY), randomYRadius, new Vector2D_1.default(randomXDir, randomYDir)));
 }
+showCells.addEventListener("change", (e) => {
+    showBorders = e.target.checked;
+});
+domRes.addEventListener("change", (e) => {
+    if (e && e.target) {
+        resolution = parseInt(e.target.value);
+    }
+});
 canvas.addEventListener("click", (e) => {
     for (let i = 0; i < cells.length; i++) {
         const c = cells[i];
@@ -34,7 +45,9 @@ setInterval(() => {
     pixels();
     cells.forEach((c) => {
         c.update();
-        //c.show(ctx);
+        if (showBorders) {
+            c.show(ctx);
+        }
     });
 }, 50);
 const pixels = () => {
@@ -45,8 +58,10 @@ const pixels = () => {
                 const dist = c.dist(x, y);
                 sum += (500 * c.radius) / dist;
             });
+            sum = sum > 360 ? 360 : sum;
+            sum = sum < 120 ? 120 : sum;
             //ctx.fillStyle = `rgb(${sum}, ${sum}, ${sum})`;
-            ctx.fillStyle = `hsl(${sum}, 100%, 75%)`;
+            ctx.fillStyle = `hsl(${sum}, 100%, 50%)`;
             ctx.fillRect(x, y, resolution, resolution);
         }
     }
