@@ -46,4 +46,9 @@ canvas {
   box-sizing: border-box;
 }
 
+a {
+  color: #1145d3;
+  text-decoration: none;
+}
+
 /*# sourceMappingURL=main.css.map */
