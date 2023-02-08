@@ -11,7 +11,10 @@ export default class Cell {
     this.direction = dir;
   }
 
-  update() {
+  /**
+   * Updates the Position of this cell
+   */
+  update(): void {
     if (this.position.x < this.radius || this.position.x > 640 - this.radius) {
       this.direction.x *= -1;
     }
@@ -23,20 +26,34 @@ export default class Cell {
     this.position.add(this.direction);
   }
 
-  dist(x: number, y: number) {
+  /**
+   * Calculates the distance between the cell and the given point
+   * @param x The x-coordinate of the target
+   * @param y The y-coordinate of the target
+   * @returns The distance between this cell and the target point
+   */
+  dist(x: number, y: number): number {
     const deltaX = Math.abs(this.position.x - x);
     const deltaY = Math.abs(this.position.y - y);
     return Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2));
   }
 
-  show(ctx: CanvasRenderingContext2D) {
+  /**
+   * Renders the cell as a circle to the given RenderingContext
+   * @param ctx The RenderingContext to render the cell to
+   */
+  show(ctx: CanvasRenderingContext2D): void {
     ctx.beginPath();
     ctx.arc(this.position.x, this.position.y, this.radius, 0, Math.PI * 2);
     ctx.stroke();
     ctx.closePath();
   }
 
-  split() {
+  /**
+   * Splits the cell into two new cells that are slightly smaller
+   * @returns An Array containing two new Cells
+   */
+  split(): Cell[] {
     const res = [];
     res.push(
       new Cell(

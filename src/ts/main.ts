@@ -8,16 +8,16 @@ const domRes = document.querySelector("#resolution") as HTMLSelectElement;
 const showCells = document.querySelector("#showCells") as HTMLInputElement;
 
 let resolution = 4;
-let showBorders = false;
+let showBorders = showCells.checked;
 
 const cells: Cell[] = [];
 
-for (let i = 0; i < 1; i++) {
-  const randomX = Math.random() * 640;
-  const randomY = Math.random() * 640;
+for (let i = 0; i < 3; i++) {
+  const randomX = Math.random() * 580 + 30;
+  const randomY = Math.random() * 580 + 30;
   const randomXDir = Math.random() * 10 - 5;
   const randomYDir = Math.random() * 10 - 5;
-  const randomYRadius = Math.random() * 50 + 5;
+  const randomYRadius = Math.random() * 10 + 20;
   cells.push(
     new Cell(
       new Vector2D(randomX, randomY),
@@ -28,12 +28,14 @@ for (let i = 0; i < 1; i++) {
 }
 
 showCells.addEventListener("change", (e) => {
-  showBorders = e.target.checked;
+  const t = e.target as HTMLInputElement;
+  showBorders = t.checked;
 });
 
 domRes.addEventListener("change", (e: Event) => {
   if (e && e.target) {
-    resolution = parseInt(e.target.value);
+    const t = e.target as HTMLInputElement;
+    resolution = parseInt(t.value);
   }
 });
 

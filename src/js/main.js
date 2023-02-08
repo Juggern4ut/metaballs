@@ -10,22 +10,24 @@ const ctx = canvas.getContext("2d");
 const domRes = document.querySelector("#resolution");
 const showCells = document.querySelector("#showCells");
 let resolution = 4;
-let showBorders = false;
+let showBorders = showCells.checked;
 const cells = [];
-for (let i = 0; i < 1; i++) {
-    const randomX = Math.random() * 640;
-    const randomY = Math.random() * 640;
+for (let i = 0; i < 3; i++) {
+    const randomX = Math.random() * 580 + 30;
+    const randomY = Math.random() * 580 + 30;
     const randomXDir = Math.random() * 10 - 5;
     const randomYDir = Math.random() * 10 - 5;
-    const randomYRadius = Math.random() * 50 + 5;
+    const randomYRadius = Math.random() * 10 + 20;
     cells.push(new Cell_1.default(new Vector2D_1.default(randomX, randomY), randomYRadius, new Vector2D_1.default(randomXDir, randomYDir)));
 }
 showCells.addEventListener("change", (e) => {
-    showBorders = e.target.checked;
+    const t = e.target;
+    showBorders = t.checked;
 });
 domRes.addEventListener("change", (e) => {
     if (e && e.target) {
-        resolution = parseInt(e.target.value);
+        const t = e.target;
+        resolution = parseInt(t.value);
     }
 });
 canvas.addEventListener("click", (e) => {
