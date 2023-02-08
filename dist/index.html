@@ -6,18 +6,63 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Metaballs</title>
     <script src="./js/main.js" defer></script>
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
     <link rel="stylesheet" href="./css/main.css" />
   </head>
   <body>
-    <canvas id="canvas" width="640" height="640"></canvas>
-    <select id="resolution">
-      <option value="1">1 (slowest)</option>
-      <option value="2">2</option>
-      <option selected value="4">4</option>
-      <option value="8">8</option>
-      <option value="16">16 (fastest)</option>
-    </select>
-    <label>Show Cell-Borders</label>
-    <input type="checkbox" id="showCells" />
+    <header>
+      <h1>Metaballs</h1>
+      <p>
+        This is a simple project that generates Metaballs. If the balls are
+        clicked, they will split into two smaller metaballs.
+      </p>
+      <p>
+        Metaballs are mathematical models used to create the appearance of a
+        liquid or blob-like object. They are commonly used in computer graphics
+        to simulate organic or fluid-like shapes. The way metaballs work is by
+        defining a surface that changes based on the proximity of several
+        defined objects, called control points. The resulting surface is smooth
+        and can have a variety of shapes, depending on the position and number
+        of control points.
+      </p>
+      <p>
+        In summary, metaballs are a useful tool for creating smooth, flowing
+        shapes in computer graphics and are often used to simulate fluid-like
+        objects.
+      </p>
+      <p>
+        Their appearance is reminiscent of the old lava lamps from the 1970s.
+      </p>
+    </header>
+    <main>
+      <section class="controls">
+        <div>
+          <p>Resolution</p>
+          <select id="resolution">
+            <option value="1">1:1 (slowest)</option>
+            <option value="2">1:2</option>
+            <option selected value="4">1:4</option>
+            <option value="8">1:8</option>
+            <option value="16">1:16 (fastest)</option>
+          </select>
+        </div>
+        <div>
+          <label>Show Cell-Borders</label>
+          <input type="checkbox" id="showCells" />
+        </div>
+      </section>
+      <canvas id="canvas" width="640" height="640"></canvas>
+    </main>
+    <footer>
+      <p>
+        This Project was inspired by the
+        <a
+          href="https://thecodingtrain.com/challenges/28-metaballs"
+          target="_blank"
+          >CodingTrain</a
+        >
+        who did a great Video explaining metaballs in detail.
+      </p>
+    </footer>
   </body>
 </html>

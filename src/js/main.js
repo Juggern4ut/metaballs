@@ -31,9 +31,13 @@ domRes.addEventListener("change", (e) => {
     }
 });
 canvas.addEventListener("click", (e) => {
+    const t = e.target;
+    const bb = t.getBoundingClientRect();
+    const relativeY = e.pageY - bb.y - window.scrollY;
+    const relativeX = e.pageX - bb.x - window.scrollX;
     for (let i = 0; i < cells.length; i++) {
         const c = cells[i];
-        if (c.dist(e.pageX, e.pageY) <= c.radius) {
+        if (c.dist(relativeX, relativeY) <= c.radius) {
             const newCells = c.split();
             cells.push(newCells[0]);
             cells.push(newCells[1]);
