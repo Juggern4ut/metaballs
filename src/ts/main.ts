@@ -7,7 +7,7 @@ const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
 const domRes = document.querySelector("#resolution") as HTMLSelectElement;
 const showCells = document.querySelector("#showCells") as HTMLInputElement;
 
-let resolution = 4;
+let resolution = parseInt(domRes.value);
 let showBorders = showCells.checked;
 
 const cells: Cell[] = [];
